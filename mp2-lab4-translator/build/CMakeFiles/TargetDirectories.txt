@@ -1,0 +1,5 @@
+C:/Users/danil/mp2-lab4-translator/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/danil/mp2-lab4-translator/build/CMakeFiles/ZERO_CHECK.dir
+C:/Users/danil/mp2-lab4-translator/build/src/CMakeFiles/Translator.dir
+C:/Users/danil/mp2-lab4-translator/build/gtest/CMakeFiles/gtest.dir
+C:/Users/danil/mp2-lab4-translator/build/test/CMakeFiles/test_Translator.dir
