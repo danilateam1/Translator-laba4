@@ -6,8 +6,7 @@ Translator::Translator(const string& str) {
     deleteSymbol(this->str, ' ');
     toInfix();
     toPostfix();
-}
-
+} 
 bool Translator::isDigit(char c) {
     return '0' <= c && c <= '9';
 }
@@ -32,20 +31,24 @@ void Translator::toInfix() {
     State t = State::NOTHING;
     int begin = 0;
     int CountBracket = 0;
+    int pointcount = 0;
     for (int i = 0; i < str.size(); i++) {
         char c = str[i];
         switch (t) {
         case (State::NUMBER):
-            if (isPoint(c) || isDigit(c))
-                continue;
+            if (pointcount > 1){ throw invalid_argument("MORE 1 POINT"); }
+            if (isPoint(c)) { pointcount++; continue; }
+            if (isDigit(c)) continue;
             infix.emplace_back(State::NUMBER, str.substr(begin, i - begin));
             if (isRBracket(c)) {
                 begin = i;
                 t = State::RBRACKET;
+                pointcount = 0;
             }
             else if (isOperation(c)) {
                 begin = i;
                 t = State::OPERATION;
+                pointcount = 0;
             }
             else {
                 throw invalid_argument("BAD STR");
@@ -195,6 +198,9 @@ double Translator::Calculate()
             break;
         case '/':
             right = st.top();
+            if (right == 0.0) {
+                throw invalid_argument("DIV 0 ERROR");
+            }
             st.pop();
             left = st.top();
             st.pop();
